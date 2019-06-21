@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
                 vim less \
 		gcc \
 		libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev \
+		ansible \
 	        && rm -rf /var/lib/apt/lists/*
 
 RUN vagrant plugin install vagrant-libvirt
