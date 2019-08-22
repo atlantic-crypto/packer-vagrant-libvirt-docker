@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN vagrant plugin install vagrant-libvirt
 
+ADD ./package_domain.rb /tmp
+RUN cp /tmp/package_domain.rb ./root/.vagrant.d/gems/2.*/gems/vagrant-libvirt-*/lib/vagrant-libvirt/action/package_domain.rb
+
 # add packer binaries
 RUN curl https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip > /tmp/packer.zip && \
     unzip /tmp/packer.zip -d /usr/local/bin/ && \
