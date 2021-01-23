@@ -1,20 +1,21 @@
 FROM ubuntu:bionic
 
-ENV PACKER_VERSION=1.4.1 
+ENV PACKER_VERSION=1.6.6
 
 # install qemu
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		qemu \
-  	        libvirt-bin ebtables dnsmasq-base libguestfs-tools \ 
-                curl \
-                unzip \
-                ca-certificates \
-                vagrant \
-                vim less \
-		gcc \
-		libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev \
-		ansible \
-	        && rm -rf /var/lib/apt/lists/*
+    qemu \
+    libvirt-bin ebtables dnsmasq-base libguestfs-tools \
+    curl \
+    unzip \
+    rsync \
+    ca-certificates \
+    vagrant \
+    vim less \
+    gcc \
+    libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev \
+    ansible \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN vagrant plugin install vagrant-libvirt
 
