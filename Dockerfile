@@ -12,7 +12,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     vagrant \
     vim less \
+    parted \
     gcc \
+    grub-efi-amd64-bin \
+    grub-pc \
     libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev \
     ansible \
     && rm -rf /var/lib/apt/lists/*
