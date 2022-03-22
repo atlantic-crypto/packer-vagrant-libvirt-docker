@@ -1,19 +1,31 @@
-FROM ubuntu:bionic
+FROM ubuntu:focal-20220316
 
 ENV PACKER_VERSION=1.6.6
 
-# install qemu
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    qemu \
-    libvirt-bin ebtables dnsmasq-base libguestfs-tools \
-    curl \
-    unzip \
-    rsync \
+# libvirt-bin has been split into packages: 
+#   - libvirt-daemon-system
+#   - libvirt-clients
+# see: https://lists.debian.org/debian-user/2016/11/msg00518.html
+
+# Install locales to prevent tzdata configuration during build
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    apt-utils \
+    build-essential \
     ca-certificates \
+    curl \
+    less \
+    rsync \
+    vim \
+    unzip \
+    &&  rm -rf /var/lib/apt/lists/* 
+
+# install qemu
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    qemu \
+    libvirt0 libvirt-daemon-system libvirt-clients ruby-libvirt \
+    ebtables dnsmasq-base libguestfs-tools \
     vagrant \
-    vim less \
     parted \
-    gcc \
     grub-efi-amd64-bin \
     grub-pc \
     libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev \
